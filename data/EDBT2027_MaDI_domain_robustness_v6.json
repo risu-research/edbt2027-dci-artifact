@@ -1,0 +1,159 @@
+{
+  "title": "EDBT 2027 MaDI-Bench \u2014 domain-aware robustness and exact small-cluster inference (v6)",
+  "date": "2026-10-07",
+  "source": "EDBT2027_MaDI_DCI_incremental_v5.json",
+  "cluster_bootstrap": {
+    "n_exact_resamples": 256,
+    "delta_R2": {
+      "observed": 0.2037408967,
+      "bootstrap_mean": 0.21480559506184016,
+      "median": 0.20401832997122282,
+      "percentile_95_CI": [
+        0.10893640512373748,
+        0.39103109876107633
+      ],
+      "min": 0.10867981030920285,
+      "max": 0.47447149462517024,
+      "positive_resamples": 256
+    },
+    "partial_R2": {
+      "observed": 0.2226752991,
+      "percentile_95_CI": [
+        0.1196777511667194,
+        0.45252030143131117
+      ],
+      "min": 0.11797702391902846,
+      "max": 0.5785576145466607
+    },
+    "DCI_beta": {
+      "observed": 0.57487026,
+      "percentile_95_CI": [
+        0.45685783563033844,
+        0.8310916344281803
+      ],
+      "min": 0.4432002725086761,
+      "max": 0.8509407089553106,
+      "positive_resamples": 256
+    }
+  },
+  "leave_one_domain_out_training_sensitivity": {
+    "products": {
+      "domains_kept": [
+        "companies_clean",
+        "music",
+        "papers"
+      ],
+      "simple_R2": 0.09509794526664678,
+      "full_R2": 0.34360127410207375,
+      "delta_R2": 0.24850332883542697
+    },
+    "companies_clean": {
+      "domains_kept": [
+        "products",
+        "music",
+        "papers"
+      ],
+      "simple_R2": 0.09849934251256881,
+      "full_R2": 0.33241252272980354,
+      "delta_R2": 0.23391318021723473
+    },
+    "music": {
+      "domains_kept": [
+        "products",
+        "companies_clean",
+        "papers"
+      ],
+      "simple_R2": 0.09702015026090409,
+      "full_R2": 0.3327252960616603,
+      "delta_R2": 0.2357051458007562
+    },
+    "papers": {
+      "domains_kept": [
+        "products",
+        "companies_clean",
+        "music"
+      ],
+      "simple_R2": 0.07282058133511929,
+      "full_R2": 0.19587321841693373,
+      "delta_R2": 0.12305263708181444
+    }
+  },
+  "exact_wild_cluster_sign_flip": {
+    "clusters": 4,
+    "exact_sign_patterns": 16,
+    "observed_DCI_beta": 0.5748702636821282,
+    "one_sided_p": 0.0625,
+    "two_sided_p": 0.125,
+    "null_distribution": [
+      -0.5748702636821279,
+      -0.4483825248652408,
+      -0.3460679144144125,
+      -0.2715611597173128,
+      -0.21958017559752538,
+      -0.14507342090042571,
+      -0.08372892836728946,
+      -0.04275881044959747,
+      0.04275881044959773,
+      0.08372892836728973,
+      0.145073420900426,
+      0.21958017559752563,
+      0.27156115971731315,
+      0.34606791441441276,
+      0.44838252486524105,
+      0.5748702636821282
+    ],
+    "interpretation": "With only four independent domain clusters, exact cluster-level inference has coarse 1/16 resolution."
+  },
+  "domain_sign_consistency": {
+    "positive_domains": 4,
+    "total_domains": 4,
+    "one_sided_exact_sign_p": 0.0625,
+    "two_sided_exact_sign_p": 0.125,
+    "domain_delta_R2": {
+      "products": 0.148181,
+      "companies_clean": 0.116006,
+      "music": 0.192651,
+      "papers": 0.474471
+    }
+  },
+  "adversarial_domain_reweighting": {
+    "minimum_delta_R2_found": 0.10786310172582449,
+    "weights": {
+      "products": 0.387147397443863,
+      "companies_clean": 0.6128526025561396,
+      "music": 0.0,
+      "papers": 0.0
+    },
+    "note": "Numerical simplex minimization over nonnegative domain weights summing to one; a robustness sensitivity, not a formal proof."
+  },
+  "operator_awareness_domain_bootstrap": {
+    "domain_mean_DCI_minus_fuser_agnostic": {
+      "products": 0.12855400000000003,
+      "companies_clean": 0.15169300000000002,
+      "music": 0.237032,
+      "papers": 0.41510800000000003
+    },
+    "observed_equal_domain_mean_advantage": 0.23309675000000002,
+    "exact_domain_bootstrap_95_CI": [
+      0.1401235,
+      0.34925425000000004
+    ],
+    "min_bootstrap_mean": 0.12855400000000003,
+    "positive_resamples": 256,
+    "n_resamples": 256
+  },
+  "recommended_interpretation": {
+    "supported": [
+      "DCI adds substantial incremental predictive value beyond four simple proxies in every domain.",
+      "All 256 exact four-domain bootstrap resamples retain positive incremental R2.",
+      "Leave-one-domain-out transfer deltas are positive for all four held-out domains.",
+      "The operator-aware advantage over a fuser-agnostic change proxy is positive in every domain."
+    ],
+    "caution": [
+      "There are only four independent domain clusters.",
+      "Exact domain-level sign and wild-cluster tests therefore have minimum one-sided p-value 0.0625.",
+      "Do not describe the domain-cluster result as conventionally statistically significant at alpha=0.05.",
+      "Use the domain bootstrap as robustness/uncertainty evidence, and v4's 24 fixed-(domain,k) paired analysis as complementary finer-grained evidence."
+    ]
+  }
+}

@@ -1,0 +1,411 @@
+{
+  "design": {
+    "primary_domains": [
+      "products",
+      "companies_clean",
+      "music",
+      "papers"
+    ],
+    "excluded_from_primary": {
+      "games": "Released fusion gold does not expose complete 100-entity source membership; labeled positives are incomplete. Reserve for silver/robustness analysis."
+    },
+    "perturbation": "Source-preserving cyclic permutation of exactly one movable source record among k eligible gold clusters. Every affected cluster preserves cluster size and source composition.",
+    "movable_source": {
+      "products": "products_3",
+      "companies_clean": "fullcontact",
+      "music": "discogs",
+      "papers": "crossref"
+    },
+    "k_values": [
+      5,
+      10,
+      15,
+      20,
+      25,
+      30
+    ],
+    "selection": "For each domain and k, 20,000 seeded random cyclic permutations were scored by gold-free DCI; highest- and lowest-DCI candidates were retained. First 500 per k were retained as random predictive samples.",
+    "dci": "Count of target fusion attributes whose fused output changes under the counterfactual source-record reassignment, computed from source values plus the fixed domain fusion operator only (no fusion gold values).",
+    "structural_metrics": {
+      "em_pair_f1": "Anchor-leaf correspondence F1. With k wrong movable-source links and N gold anchor-leaf links: (N-k)/N.",
+      "b3_f1": "B³ cluster F1 over the controlled gold population.",
+      "ceaf_e_f1": "CEAF_e cluster F1 over the controlled gold population."
+    }
+  },
+  "population": {
+    "products": {
+      "entities": 100,
+      "records": 367,
+      "gold_anchor_leaf_edges": 267,
+      "eligible": 72,
+      "baseline_correct": 693,
+      "gradeable_cells": 836,
+      "baseline_accuracy": 0.828947
+    },
+    "companies_clean": {
+      "entities": 96,
+      "records": 244,
+      "gold_anchor_leaf_edges": 148,
+      "eligible": 52,
+      "baseline_correct": 393,
+      "gradeable_cells": 584,
+      "baseline_accuracy": 0.672945,
+      "excluded_anchors": [
+        "petronas-dagangan",
+        "petronas-chemicals",
+        "mitsubishi-materials",
+        "mitsubishi-corp"
+      ],
+      "duplicate_members": [
+        "http://dbpedia.org/resource/Petronas",
+        "fullcontact_513"
+      ]
+    },
+    "music": {
+      "entities": 100,
+      "records": 206,
+      "gold_anchor_leaf_edges": 106,
+      "eligible": 80,
+      "baseline_correct": 527,
+      "gradeable_cells": 726,
+      "baseline_accuracy": 0.725895,
+      "note": "One gold entity is MusicBrainz-only; PyDI base workflow uses include_singletons=False, so its perfect-membership fused row is absent."
+    },
+    "papers": {
+      "entities": 100,
+      "records": 300,
+      "gold_anchor_leaf_edges": 200,
+      "eligible": 100,
+      "baseline_correct": 842,
+      "gradeable_cells": 922,
+      "baseline_accuracy": 0.913232
+    }
+  },
+  "results": {
+    "products": [
+      {
+        "k": 5,
+        "em_pair_f1": 0.981273,
+        "b3_f1": 0.979564,
+        "ceaf_e_f1": 0.9875,
+        "high_dci": 39,
+        "high_acc": 0.820574,
+        "low_dci": 1,
+        "low_acc": 0.827751,
+        "gap_pp": 0.717703
+      },
+      {
+        "k": 10,
+        "em_pair_f1": 0.962547,
+        "b3_f1": 0.959128,
+        "ceaf_e_f1": 0.975,
+        "high_dci": 64,
+        "high_acc": 0.811005,
+        "low_dci": 5,
+        "low_acc": 0.825359,
+        "gap_pp": 1.435407
+      },
+      {
+        "k": 15,
+        "em_pair_f1": 0.94382,
+        "b3_f1": 0.938692,
+        "ceaf_e_f1": 0.9625,
+        "high_dci": 79,
+        "high_acc": 0.815789,
+        "low_dci": 15,
+        "low_acc": 0.825359,
+        "gap_pp": 0.956938
+      },
+      {
+        "k": 20,
+        "em_pair_f1": 0.925094,
+        "b3_f1": 0.918256,
+        "ceaf_e_f1": 0.95,
+        "high_dci": 95,
+        "high_acc": 0.805024,
+        "low_dci": 26,
+        "low_acc": 0.820574,
+        "gap_pp": 1.555024
+      },
+      {
+        "k": 25,
+        "em_pair_f1": 0.906367,
+        "b3_f1": 0.89782,
+        "ceaf_e_f1": 0.9375,
+        "high_dci": 109,
+        "high_acc": 0.807416,
+        "low_dci": 34,
+        "low_acc": 0.818182,
+        "gap_pp": 1.076555
+      },
+      {
+        "k": 30,
+        "em_pair_f1": 0.88764,
+        "b3_f1": 0.877384,
+        "ceaf_e_f1": 0.925,
+        "high_dci": 131,
+        "high_acc": 0.799043,
+        "low_dci": 48,
+        "low_acc": 0.814593,
+        "gap_pp": 1.555024
+      }
+    ],
+    "companies_clean": [
+      {
+        "k": 5,
+        "em_pair_f1": 0.966216,
+        "b3_f1": 0.972678,
+        "ceaf_e_f1": 0.982639,
+        "high_dci": 7,
+        "high_acc": 0.672945,
+        "low_dci": 0,
+        "low_acc": 0.672945,
+        "gap_pp": 0.0
+      },
+      {
+        "k": 10,
+        "em_pair_f1": 0.932432,
+        "b3_f1": 0.945355,
+        "ceaf_e_f1": 0.965278,
+        "high_dci": 12,
+        "high_acc": 0.669521,
+        "low_dci": 3,
+        "low_acc": 0.671233,
+        "gap_pp": 0.171233
+      },
+      {
+        "k": 15,
+        "em_pair_f1": 0.898649,
+        "b3_f1": 0.918033,
+        "ceaf_e_f1": 0.947917,
+        "high_dci": 18,
+        "high_acc": 0.666096,
+        "low_dci": 6,
+        "low_acc": 0.669521,
+        "gap_pp": 0.342466
+      },
+      {
+        "k": 20,
+        "em_pair_f1": 0.864865,
+        "b3_f1": 0.89071,
+        "ceaf_e_f1": 0.930556,
+        "high_dci": 22,
+        "high_acc": 0.660959,
+        "low_dci": 9,
+        "low_acc": 0.667808,
+        "gap_pp": 0.684932
+      },
+      {
+        "k": 25,
+        "em_pair_f1": 0.831081,
+        "b3_f1": 0.863388,
+        "ceaf_e_f1": 0.913194,
+        "high_dci": 26,
+        "high_acc": 0.657534,
+        "low_dci": 12,
+        "low_acc": 0.666096,
+        "gap_pp": 0.856164
+      },
+      {
+        "k": 30,
+        "em_pair_f1": 0.797297,
+        "b3_f1": 0.836066,
+        "ceaf_e_f1": 0.895833,
+        "high_dci": 31,
+        "high_acc": 0.657534,
+        "low_dci": 16,
+        "low_acc": 0.669521,
+        "gap_pp": 1.19863
+      }
+    ],
+    "music": [
+      {
+        "k": 5,
+        "em_pair_f1": 0.95283,
+        "b3_f1": 0.975728,
+        "ceaf_e_f1": 0.975,
+        "high_dci": 23,
+        "high_acc": 0.703857,
+        "low_dci": 10,
+        "low_acc": 0.713499,
+        "gap_pp": 0.964187
+      },
+      {
+        "k": 10,
+        "em_pair_f1": 0.90566,
+        "b3_f1": 0.951456,
+        "ceaf_e_f1": 0.95,
+        "high_dci": 43,
+        "high_acc": 0.687328,
+        "low_dci": 23,
+        "low_acc": 0.699725,
+        "gap_pp": 1.239669
+      },
+      {
+        "k": 15,
+        "em_pair_f1": 0.858491,
+        "b3_f1": 0.927184,
+        "ceaf_e_f1": 0.925,
+        "high_dci": 61,
+        "high_acc": 0.665289,
+        "low_dci": 36,
+        "low_acc": 0.684573,
+        "gap_pp": 1.928375
+      },
+      {
+        "k": 20,
+        "em_pair_f1": 0.811321,
+        "b3_f1": 0.902913,
+        "ceaf_e_f1": 0.9,
+        "high_dci": 79,
+        "high_acc": 0.65427,
+        "low_dci": 52,
+        "low_acc": 0.674931,
+        "gap_pp": 2.066116
+      },
+      {
+        "k": 25,
+        "em_pair_f1": 0.764151,
+        "b3_f1": 0.878641,
+        "ceaf_e_f1": 0.875,
+        "high_dci": 97,
+        "high_acc": 0.630854,
+        "low_dci": 67,
+        "low_acc": 0.662534,
+        "gap_pp": 3.168044
+      },
+      {
+        "k": 30,
+        "em_pair_f1": 0.716981,
+        "b3_f1": 0.854369,
+        "ceaf_e_f1": 0.85,
+        "high_dci": 115,
+        "high_acc": 0.612948,
+        "low_dci": 80,
+        "low_acc": 0.644628,
+        "gap_pp": 3.168044
+      }
+    ],
+    "papers": [
+      {
+        "k": 5,
+        "em_pair_f1": 0.975,
+        "b3_f1": 0.977778,
+        "ceaf_e_f1": 0.983333,
+        "high_dci": 37,
+        "high_acc": 0.885033,
+        "low_dci": 17,
+        "low_acc": 0.898048,
+        "gap_pp": 1.301518
+      },
+      {
+        "k": 10,
+        "em_pair_f1": 0.95,
+        "b3_f1": 0.955556,
+        "ceaf_e_f1": 0.966667,
+        "high_dci": 70,
+        "high_acc": 0.859002,
+        "low_dci": 38,
+        "low_acc": 0.882863,
+        "gap_pp": 2.386117
+      },
+      {
+        "k": 15,
+        "em_pair_f1": 0.925,
+        "b3_f1": 0.933333,
+        "ceaf_e_f1": 0.95,
+        "high_dci": 103,
+        "high_acc": 0.827549,
+        "low_dci": 64,
+        "low_acc": 0.859002,
+        "gap_pp": 3.145336
+      },
+      {
+        "k": 20,
+        "em_pair_f1": 0.9,
+        "b3_f1": 0.911111,
+        "ceaf_e_f1": 0.933333,
+        "high_dci": 133,
+        "high_acc": 0.803688,
+        "low_dci": 89,
+        "low_acc": 0.83731,
+        "gap_pp": 3.362256
+      },
+      {
+        "k": 25,
+        "em_pair_f1": 0.875,
+        "b3_f1": 0.888889,
+        "ceaf_e_f1": 0.916667,
+        "high_dci": 159,
+        "high_acc": 0.781996,
+        "low_dci": 110,
+        "low_acc": 0.824295,
+        "gap_pp": 4.229935
+      },
+      {
+        "k": 30,
+        "em_pair_f1": 0.85,
+        "b3_f1": 0.866667,
+        "ceaf_e_f1": 0.9,
+        "high_dci": 190,
+        "high_acc": 0.75705,
+        "low_dci": 141,
+        "low_acc": 0.79718,
+        "gap_pp": 4.013015
+      }
+    ]
+  },
+  "within_k_dci_damage_spearman": {
+    "products": {
+      "5": 0.348501,
+      "10": 0.333558,
+      "15": 0.270653,
+      "20": 0.434327,
+      "25": 0.28345,
+      "30": 0.271986,
+      "mean": 0.323746
+    },
+    "companies_clean": {
+      "5": 0.125907,
+      "10": 0.095575,
+      "15": 0.15231,
+      "20": 0.156242,
+      "25": 0.283628,
+      "30": 0.165826,
+      "mean": 0.163248
+    },
+    "music": {
+      "5": 0.510742,
+      "10": 0.42742,
+      "15": 0.501357,
+      "20": 0.542109,
+      "25": 0.571771,
+      "30": 0.558439,
+      "mean": 0.51864
+    },
+    "papers": {
+      "5": 0.684816,
+      "10": 0.720912,
+      "15": 0.731312,
+      "20": 0.685905,
+      "25": 0.74261,
+      "30": 0.738783,
+      "mean": 0.71739
+    }
+  },
+  "headline": {
+    "matched_strata": 24,
+    "strict_high_dci_more_damage": 23,
+    "ties": 1,
+    "reversals": 0,
+    "gap_pp_median": 1.368463,
+    "gap_pp_mean": 1.730112,
+    "gap_pp_max": 4.229935
+  },
+  "important_corrections": [
+    "Earlier interim output labeled a cluster-all-pairs F1 as pair_f1 for Music/Papers. Final checkpoint uses anchor-leaf EM correspondence F1 consistently across all four domains.",
+    "Earlier interim B3 formula printed for Products/Companies had an extra factor of cluster size in the denominator. Final checkpoint corrects B3 under source-preserving permutations.",
+    "Products and Companies absolute baselines are frozen to the qualification baselines (693/836 and 393/584). The common-generator counterfactual deltas are computed from the exact current source-normalized values and fixed fusion operators.",
+    "Company clean population excludes four anchors implicated by two duplicated source records, yielding 96 entities, 244 records, and 148 anchor-leaf edges."
+  ]
+}

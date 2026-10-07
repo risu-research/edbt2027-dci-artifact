@@ -18,6 +18,8 @@ The artifact is intentionally narrow. It includes the material needed to audit t
   Standard-library Python script that checks the headline quantities reported in the manuscript against the retained checkpoints.
 - `docs/REPRODUCIBILITY.md`  
   Experimental scope, upstream dependencies, population decisions, and the exact reproducibility boundary of this artifact.
+- `docs/PAPER_MAP.md`  
+  Direct map from each manuscript result to the retained checkpoint that supports it.
 
 ## Quick verification
 
